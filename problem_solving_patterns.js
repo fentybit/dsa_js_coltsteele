@@ -1,6 +1,8 @@
 //! Frequency Counter
 
-// Given two strings, write a function to determine if the second string is an anagram of the first. An anagram is a word, phrase, or name formed by rearranging the letters of another, such as cinema, formed from iceman.
+// Given two strings, write a function to determine if the second string is an anagram of the first. 
+// An anagram is a word, phrase, or name formed by rearranging the letters of another, 
+// such as cinema, formed from iceman.
 
 validAnagram('', '') // true
 validAnagram('aaz', 'zza') // false
@@ -60,7 +62,8 @@ function validAnagram(first, second) {
   }
 }
 
-// Write a function called sameFrequency. Given two positive integers, find out if the two numbers have the same frequency of digits. Solution must be with O(n) time complexity.
+// Write a function called sameFrequency. Given two positive integers, find out if the two numbers have the 
+// same frequency of digits. Solution must be with O(n) time complexity.
 
 sameFrequency(182, 281) // true
 sameFrequency(34, 14) // false
@@ -92,7 +95,8 @@ function sameFrequency(number1, number2) {
 
 //! Multiple Pointers
 
-// Implement a function called countUniqueValues, which accepts a sorted array, and counts the unique values in the array. There can be negative numbers in the array, but it will always be sorted.
+// Implement a function called countUniqueValues, which accepts a sorted array, and counts the 
+// unique values in the array. There can be negative numbers in the array, but it will always be sorted.
 
 countUniqueValues([1, 1, 1, 1, 1, 2]) // 2
 countUniqueValues([1, 2, 3, 4, 4, 4, 7, 7, 12, 12, 13]) // 7
@@ -137,16 +141,75 @@ function countUniqueValues(arr) {
   return i + 1;
 }
 
-// Implement a function called, areThereDuplicates which accepts a variable number of arguments, and checks whether there are any duplicates among the arguments passed in. You can solve this using the frequency counter pattern OR the multiple pointers pattern.
+// Implement a function called, areThereDuplicates which accepts a variable number of arguments, 
+// and checks whether there are any duplicates among the arguments passed in. You can solve this 
+// using the frequency counter pattern OR the multiple pointers pattern.
 
 areThereDuplicates(1, 2, 3) // false
 areThereDuplicates(1, 2, 2) // true
 areThereDuplicates('a', 'b', 'c', 'a') // true
 
+// O(n) time and space Complexity
+// Solution with Frequency Counter pattern
+function areThereDuplicates(...args) {
+  let freqCount = {};
+
+  for (let i in args) {
+    freqCount[args[i]] = (freqCount[args[i]] || 0) + 1;
+  }
+
+  for (let key in freqCount) {
+    if (freqCount[key] > 1) return true;
+  }
+
+  return false;
+}
+
+// Solution with Multiple Pointers pattern
+function areThereDuplicates(...args) {
+  args.sort((a, b) => a > b);
+
+  let start = 0;
+  let next = 1;
+
+  while (next < args.length) {
+    if (args[start] === args[next]) {
+      return true;
+    }
+
+    start++;
+    next++;
+  }
+
+  return false;
+}
+
+// One Liner Solution
+function areThereDuplicates() {
+  return new Set(arguments).size !== arguments.length;
+}
+
+// Write a function called averagePair. Given a sorted array of integers and a target average, 
+// determine if there is a pair of values in the array where the average of the pair equals 
+// the target average. There maybe more than one pair that matches the average target.
+
+// O(n) time complexity and O(1) space complexity
+
+averagePair([1, 2, 3], 2.5) // true
+averagePair([1, 3, 3, 5, 6, 7, 10, 12, 19], 8) // true
+averagePair([-1, 0, 3, 4, 5, 6], 4.1) // false
+averagePair([], 4) // false
+
+function averagePair(arr, avg) {
+  if (arr.length === 0) return false;
+
+
+}
 
 //! Sliding Window
 
-// Write a function called maxSubarraySum which accepts an array of integers and a number called n. The function should calculate the maximum sum of n consecutive elements in the array. 
+// Write a function called maxSubarraySum which accepts an array of integers and a number called n. 
+// The function should calculate the maximum sum of n consecutive elements in the array. 
 
 maxSubarraySum([1, 2, 5, 2, 8, 1, 5], 2) // 10
 maxSubarraySum([1, 2, 5, 2, 8, 1, 5], 4) // 17
@@ -192,9 +255,12 @@ function maxSubarraySum(arr, num) {
 }
 
 //! Divide and Conquer
-// This pattern involves dividing a data set into smaller chunks and then repeating a provess with a subset of data. This pattern can tremendously decrease time complexity. 
+// This pattern involves dividing a data set into smaller chunks and then repeating a process 
+// with a subset of data. This pattern can tremendously decrease time complexity. 
 
-// Given a sorted array of integers, write a function called search, that accepts a value and returns the index where the value passed to the function is located. If the value is not found, return -1.
+// Given a sorted array of integers, write a function called search, that accepts a value and 
+// returns the index where the value passed to the function is located. If the value is not 
+// found, return -1.
 
 search([1, 2, 3, 4, 5, 6], 4) // 3
 search([1, 2, 3, 4, 5, 6], 6) // 5
