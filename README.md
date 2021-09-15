@@ -4,7 +4,7 @@
 
 This is my personal note to Udemy course [JavaScript Algorithms and Data Structures Masterclass](git@github.com:fentybit/dsa_js_coltsteele.git) by Colt Steele.
 
-**[Problem Solving Patterns]()**
+**[Problem Solving Patterns](problem_solving_patterns.js)**
 
 - Frequency Counter
 - Multiple Pointers
