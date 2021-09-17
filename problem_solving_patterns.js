@@ -201,9 +201,21 @@ averagePair([-1, 0, 3, 4, 5, 6], 4.1) // false
 averagePair([], 4) // false
 
 function averagePair(arr, avg) {
-  if (arr.length === 0) return false;
+  let start = 0;
+  let end = arr.length - 1;
 
+  while (start < end) {
+    let value = (arr[start] + arr[end]) / 2;
+    if (value === avg) {
+      return true;
+    } else if (value < avg) {
+      start++;
+    } else {
+      end--;
+    }
+  }
 
+  return false;
 }
 
 //! Sliding Window
