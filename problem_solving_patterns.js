@@ -149,7 +149,7 @@ areThereDuplicates(1, 2, 3) // false
 areThereDuplicates(1, 2, 2) // true
 areThereDuplicates('a', 'b', 'c', 'a') // true
 
-// O(n) time and space Complexity
+// O(n) time and space complexity
 // Solution with Frequency Counter pattern
 function areThereDuplicates(...args) {
   let freqCount = {};
@@ -218,6 +218,43 @@ function averagePair(arr, avg) {
   return false;
 }
 
+// Write a function called isSubsequence which takes in two strings and checks whether the characters
+// in the first string form a subsequence of the characters in the second string. In other words, the 
+// function should check whether the characters in the first string appear somewhere in the second 
+// string, without their order changing.
+
+isSubsequence('hello', 'hello world') // true
+isSubsequence('sing', 'sting') // true
+isSubsequence('abc', 'abracadabra') // true
+isSubsequence('abc', 'acb') // false
+
+// O(n + m) time complexity
+// O(1) space complexity
+
+// Iterative Solution
+function isSubsequence(str1, str2) {
+  let start = 0;
+  let secondStart = 0;
+  if (!str1) return true;
+
+  while (secondStart < str2.length) {
+    if (str1[start] === str2[secondStart]) start++;
+    if (start === str1.length) return true;
+    secondStart++;
+  }
+
+  return false;
+}
+
+// Recursive Solution but != O(1) space
+function isSubsequence(str1, str2) {
+  if (str1.length === 0) return true;
+  if (str2.length === 0) return false;
+
+  if (str1[0] === str2[0]) return isSubsequence(str1.slice(1), str2.slice(1));
+  return isSubsequence(str1, str2.slice(1));
+}
+
 //! Sliding Window
 
 // Write a function called maxSubarraySum which accepts an array of integers and a number called n. 
@@ -265,6 +302,8 @@ function maxSubarraySum(arr, num) {
 
   return maxSum;
 }
+
+
 
 //! Divide and Conquer
 // This pattern involves dividing a data set into smaller chunks and then repeating a process 
