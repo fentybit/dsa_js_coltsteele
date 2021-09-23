@@ -340,6 +340,58 @@ function minSubArrayLen(arr, sum) {
   return minLen === Infinity ? 0 : minLen;
 }
 
+// Write a function called findLongestSubstring, which accepts a string and returns the length 
+// of the longest substring with all distinct characters.
+
+findLongestSubstring('') // 0
+findLongestSubstring('rithmschool') // 7
+findLongestSubstring('thisisawesome') // 6
+findLongestSubstring('thecatinthehat') // 7
+findLongestSubstring('bbbbbb') // 1
+findLongestSubstring('longestsubstring') // 8
+findLongestSubstring('thisishowwedoit') // 6
+
+// O(n2) time complexity
+function findLongestSubstring(str) {
+  if (str.length === 0) return 0;
+
+  let left = 0;
+  let right = 1;
+  let newStr = str[left];
+  let count = -Infinity;
+
+  while (right < str.length) {
+    if (newStr.includes(str[right])) {
+      let i = newStr.indexOf(str[right]) + 1;
+      newStr = newStr.slice(i);
+    }
+    newStr = newStr.concat(str[right]);
+    right++;
+    count = Math.max(count, newStr.length);
+  }
+
+  return count;
+}
+
+// O(n) time complexity
+function findLongestSubstring(str) {
+  let longest = 0;
+  let lookup = {};
+  let start = 0;
+
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
+    if (lookup[char]) {
+      start = Math.max(start, lookup[char]);
+    }
+
+    longest = Math.max(longest, i - start + 1);
+    lookup[char] = i + 1;
+  }
+
+  return longest;
+}
+
 //! Divide and Conquer
 // This pattern involves dividing a data set into smaller chunks and then repeating a process 
 // with a subset of data. This pattern can tremendously decrease time complexity. 
