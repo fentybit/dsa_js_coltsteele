@@ -4,7 +4,7 @@
 
 This is my personal note to Udemy course [JavaScript Algorithms and Data Structures Masterclass](git@github.com:fentybit/dsa_js_coltsteele.git) by Colt Steele.
 
-**[Problem Solving Patterns](problem_solving_patterns.js)**
+**[Problem Solving Patterns](01_problem_solving_patterns.js)**
 
 - Frequency Counter
 - Multiple Pointers
@@ -13,3 +13,5 @@ This is my personal note to Udemy course [JavaScript Algorithms and Data Structu
 - Dynamic Programming
 - Greedy Algorithms
 - Backtracking
+
+**[Recursion](02_recursion.js)**
