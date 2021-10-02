@@ -165,7 +165,7 @@ var obj1 = {
       alsoNotANumber: "yup"
     }
   }
-}
+};
 
 var obj2 = {
   a: 2,
@@ -177,4 +177,31 @@ var obj2 = {
 
 nestedEvenSum(obj1); // 6
 nestedEvenSum(obj2); // 10
+
+function nestedEvenSum(obj, total = 0) {
+  for (let key in obj) {
+    if (typeof obj[key] === 'object') {
+      total += nestedEvenSum(obj[key]);
+    } else if (obj[key] % 2 === 0) {
+      total += obj[key];
+    }
+  }
+
+  return total;
+}
+
+// Write a recursive function called capitalizeWords.
+// Given an array of words, return a new array containing each word capitalized.
+
+let words = ['i', 'am', 'learning', 'recursion'];
+capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
+
+function capitalizeWords(arr) {
+  if (arr.length === 1) return [arr[0].toUpperCase()];
+
+  let recursion = capitalizeWords(arr.slice(0, -1));
+  recursion.push(arr[arr.length - 1].toUpperCase());
+
+  return recursion;
+}
 
