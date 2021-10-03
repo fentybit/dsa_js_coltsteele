@@ -15,3 +15,5 @@ This is my personal note to Udemy course [JavaScript Algorithms and Data Structu
 - Backtracking
 
 **[Recursion](02_recursion.js)**
+
+**[Searching Algorithms](03_searching_algorithms.js)**
