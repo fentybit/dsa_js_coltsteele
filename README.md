@@ -19,3 +19,5 @@ This is my personal note to Udemy course [JavaScript Algorithms and Data Structu
 **[Searching Algorithms](03_searching_algorithms.js)**
 
 **[Bubble Sort](04_bubble_sort.js)**
+
+**[Selection Sort](05_selection_sort.js)**
