@@ -21,3 +21,5 @@ This is my personal note to Udemy course [JavaScript Algorithms and Data Structu
 **[Bubble Sort](04_bubble_sort.js)**
 
 **[Selection Sort](05_selection_sort.js)**
+
+**[Insertion Sort](06_insertion_sort.js)**
