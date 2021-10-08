@@ -30,7 +30,7 @@ function bubbleSort(arr) {
   return arr;
 }
 
-// optimized with noSwaps
+// optimized with noSwap
 function bubbleSort(arr) {
   let noSwap;
   const swap = (arr, idx1, idx2) => {
@@ -52,3 +52,40 @@ function bubbleSort(arr) {
 
   return arr;
 }
+
+//! Selection Sort
+
+function selectionSort(arr) {
+  const swap = (arr, idx1, idx2) => ([arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]]);
+
+  for (let i = 0; i < arr.length; i++) {
+    let lowest = i;
+
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[j] < arr[lowest]) lowest = j;
+    }
+
+    if (i !== lowest) swap(arr, i, lowest);
+  }
+
+  return arr;
+}
+
+//! Insertion Sort
+
+function insertionSort(arr) {
+  let value;
+  for (let i = 1; i < arr.length; i++) {
+    value = arr[i];
+    for (let j = i - 1; j >= 0 && arr[j] > value; j--) {
+      arr[j + 1] = arr[j];
+    }
+    arr[j + 1] = value;
+  }
+
+  return arr;
+}
+
+// Space complexity is O(1).
+// Bubble and Insertion Sort time complexity at best can be O(n).
+// Otherwise, time complexity would be O(n2).
