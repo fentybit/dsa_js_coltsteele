@@ -18,12 +18,12 @@ This is my personal note to Udemy course [JavaScript Algorithms and Data Structu
 
 **[Searching Algorithms](03_searching_algorithms.js)**
 
-**[Bubble, Selection and Insertion Sort](04_b_s_i_sort.js)**
+**[Bubble, Selection and Insertion Sort](04_bubble_selection_insertion_sort.js)**
 
 - Bubble Sort
 - Selection Sort
 - Insertion Sort
 
-**[Merge Sort](05_merge_sort.js)**
+**[Merge Sort](05_merge_quick_sort.js)**
 
-**[Insertion Sort](06_insertion_sort.js)**
+**[ Sort]()**
