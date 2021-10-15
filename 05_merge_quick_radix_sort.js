@@ -48,8 +48,6 @@ function mergeSort(arr) {
 
 //! Quick Sort
 
-pivot([4, 8, 2, 1, 5, 7, 6, 3])
-
 // pivot function with ES2015 syntax
 function pivot(arr, start = 0, end = arr.length) {
   const swap = (arr, idx1, idx2) => [arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]];
@@ -59,7 +57,7 @@ function pivot(arr, start = 0, end = arr.length) {
   for (let i = start + 1; i < end; i++) {
     if (pivot > arr[i]) {
       swapIndex++;
-      swap(arr, swapIndex, i);
+      swap(arr, i, swapIndex);
     }
   }
 
@@ -67,18 +65,19 @@ function pivot(arr, start = 0, end = arr.length) {
   return swapIndex;
 }
 
-quickSort([100, -3, 2, 4, 6, 9, 1, 2, 5, 3, 23])
+pivot([4, 8, 2, 1, 5, 7, 6, 3]) // 3
 
 // recursive function
 function quickSort(arr, left = 0, right = arr.length) {
-  if (left < right) {
+  while (left < right) {
     let pivotIndex = pivot(arr, left, right);
     quickSort(arr, left, pivotIndex);
     quickSort(arr, pivotIndex + 1, right);
   }
-
   return arr;
 }
+
+quickSort([100, -3, 2, 4, 6, 9, 1, 2, 5, 3, 23]) // [-3, 1, 2, 2, 3, 4, 5, 6, 9, 23, 100]
 
 // Best and Average Time Complexity O(n log n)
 // O(log n) decompositions and O(n) comparisons per decomposition
@@ -87,3 +86,45 @@ function quickSort(arr, left = 0, right = arr.length) {
 // Solution to reduce time complexity can be solved by choosing a mid point in the array
 
 // Space Complexity O(n)
+
+//! Radix Sort
+
+// Helper methods
+function getDigit(num, index) {
+  return Math.floor(Math.abs(num) / Math.pow(10, index)) % 10;
+}
+
+function digitCount(num) {
+  if (num === 0) return 1;
+  return Math.floor(Math.log10(Math.abs(num))) + 1;
+}
+
+function mostDigits(arr) {
+  let maxDigits = 0;
+  for (let i = 0; i < arr.length; i++) {
+    maxDigits = Math.max(maxDigits, digitCount(arr[i]));
+  }
+
+  return maxDigits;
+}
+
+function radixSort(nums) {
+  let maxDigitCount = mostDigits(nums);
+
+  for (let j = 0; j < maxDigitCount; j++) {
+    let digitBuckets = Array.from({ length: 10 }, () => []);
+    for (let i = 0; i < nums.length; i++) {
+      let digit = getDigit(nums[i], j);
+      digitBuckets[digit].push(nums[i]);
+    }
+    nums = [].concat(...digitBuckets);
+  }
+
+  return nums;
+}
+
+radixSort([23, 345, 5467, 12, 2345, 9852])
+
+// Time Complexity O(nk)
+// Space Complexity O(n + k)
+// n is the length of the array, and k is the number of digits (average)

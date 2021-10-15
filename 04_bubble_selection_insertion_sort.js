@@ -86,6 +86,6 @@ function insertionSort(arr) {
   return arr;
 }
 
-// Space complexity is O(1).
 // Bubble and Insertion Sort time complexity at best can be O(n).
 // Otherwise, time complexity would be O(n2).
+// Space complexity is O(1).

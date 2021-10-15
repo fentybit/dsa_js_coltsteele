@@ -24,6 +24,6 @@ This is my personal note to Udemy course [JavaScript Algorithms and Data Structu
 - Selection Sort
 - Insertion Sort
 
-**[Merge Sort](05_merge_quick_sort.js)**
+**[Merge Sort](05_merge_quick_radix_sort.js)**
 
 **[ Sort]()**
