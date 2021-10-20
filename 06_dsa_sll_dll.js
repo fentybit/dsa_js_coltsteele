@@ -100,4 +100,101 @@ class SinglyLinkedList {
 
     return current;
   }
+
+  // adding a new node to the beginning of the Linked List
+  unshift(val) {
+    let newNode = new Node(val);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = this.head;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+
+    this.length++;
+    return this;
+  }
+
+  // retrieving a node by its position in the Linked List
+  get(index) {
+    if (index < 0 || this.length <= index) return null;
+    let counter = 0;
+    let current = this.head;
+
+    while (counter < index) {
+      current = current.next;
+      counter++;
+    }
+
+    return current;
+  }
+
+  // changing the value of a node based on its position in the Linked List
+  set(value, index) {
+    let foundNode = this.get(index);
+    if (foundNode) {
+      foundNode.val = value;
+      return true;
+    }
+    return false;
+  }
+
+  // adding a node to the Linked List at a specific position
+  insert(value, index) {
+    if (index < 0 || this.length < index) {
+      return false;
+    } else if (this.length === index) {
+      return !!this.push(value);
+    } else if (index === 0) {
+      return !!this.unshift(value);
+    }
+
+    let newNode = new Node(value);
+    let prevNode = this.get(index - 1);
+    let temp = prevNode.next;
+
+    prevNode.next = newNode;
+    newNode.next = temp;
+    this.length++;
+    return true;
+  }
+
+  // removing a node from the Linked List at a specific position
+  remove(index) {
+    if (index < 0 || this.length >= index) return undefined;
+    if (index === this.length - 1) return this.pop();
+    if (index === 0) return this.shift();
+
+    let prevNode = this.get(index - 1);
+    let removeNode = prevNode.next;
+    prevNode.next = removeNode.next;
+    this.length--;
+
+    return removeNode;
+  }
+
+  // reversing the Linked List in place
+  reverse() {
+    let node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+    let next;
+    let prev = null;
+
+    for (let i = 0; i < this.length; i++) {
+      next = node.next;
+      node.next = prev;
+      prev = node;
+      node = next;
+    }
+
+    return this;
+  }
 }
+
+// O(1) Insertion
+// O(1) or O(n) Removal
+// O(n) Searching
+// O(n) Access
+
