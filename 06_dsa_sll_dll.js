@@ -198,3 +198,76 @@ class SinglyLinkedList {
 // O(n) Searching
 // O(n) Access
 
+//! Doubly Linked List
+
+// Almost idential to SLL, except every node has another pointer, to the previous node!
+// More memory === more flexibility
+
+class Node {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
+    this.prev = null;
+  }
+}
+
+class DoublyLinkedList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
+  }
+
+  // adding a node to the end of the DLL
+  push(value) {
+    let newNode = new Node(value)
+
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      this.tail.next = newNode;
+      newNode.prev = this.tail;
+      this.tail = newNode;
+    }
+
+    this.length++;
+    return this;
+  }
+
+  // removing a node from the end of the DLL
+  pop() {
+    if (!this.head) return undefined;
+    let popNode = this.tail;
+
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.tail = popNode.prev;
+      this.tail.next = null;
+      popNode.prev = null;
+    }
+
+    this.length--;
+    return popNode;
+  }
+
+  // removing a node from the beginning of the DLL
+  shift() {
+    if (!this.head) return undefined;
+    let oldHead = this.head;
+
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.head = oldHead.next;
+      this.head.prev = null;
+      oldHead.next = null;
+    }
+
+    this.length--;
+    return oldHead;
+  }
+}
