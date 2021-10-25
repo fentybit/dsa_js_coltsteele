@@ -270,4 +270,106 @@ class DoublyLinkedList {
     this.length--;
     return oldHead;
   }
+
+  // adding a node to the beginning of the DLL
+  unshift(value) {
+    let newNode = new Node(value);
+
+    if (this.length === 0) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      this.head.prev = newNode;
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+
+    this.length++;
+    return this;
+  }
+
+  // accessing a node in a DLL by its position
+  get(index) {
+    if (index < 0 || this.length <= index) return null;
+    let counter, current;
+
+    if (index <= this.length / 2) {
+      current = this.head;
+      counter = 0;
+      while (counter !== index) {
+        current = current.next;
+        counter++;
+      }
+    } else {
+      counter = this.length - 1;
+      current = this.tail;
+      while (counter !== index) {
+        current = current.prev;
+        counter--;
+      }
+    }
+
+    return current;
+  }
+
+  // replacing the value of a node in DLL
+  set(value, index) {
+    let foundNode = this.get(index);
+
+    if (foundNode) {
+      foundNode.val = value;
+      return true;
+    }
+
+    return false;
+  }
+
+  // insert a node in a DLL by a certain position
+  insert(value, index) {
+    if (index < 0 || this.length < index) return false;
+    if (index === 0) return !!this.unshift(value);
+    if (index === this.length) return !!this.push(value);
+
+    let newNode = new Node(value);
+    let beforeNode = this.get(index - 1);
+    let afterNode = beforeNode.next;
+    beforeNode.next = newNode, newNode.prev = beforeNode;
+    newNode.next = afterNode, afterNode.prev = newNode;
+
+    this.length++;
+    return true;
+  }
+
+  // removing a node in a DLL by a certain position
+  remove(index) {
+    if (index < 0 || this.length <= index) return undefined;
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
+
+    let removeNode = this.get(index);
+    let beforeNode = removeNode.prev;
+    let afterNode = removeNode.next;
+    beforeNode.next = afterNode, afterNode.prev = beforeNode;
+    removeNode.prev = null, removeNode.next = null;
+
+    this.length--;
+    return removeNode;
+  }
+
+  reverse() {
+    let node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+    let next;
+    let prev = null;
+
+    for (let i = 0; i < this.length; i++) {
+      next = node.next;
+      node.next = prev;
+      prev = node;
+      node = next;
+    }
+
+    return this;
+  }
 }
