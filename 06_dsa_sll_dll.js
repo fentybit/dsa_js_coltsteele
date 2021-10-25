@@ -373,3 +373,9 @@ class DoublyLinkedList {
     return this;
   }
 }
+
+// O(1) Insertion
+// O(1) Removal
+// O(n) Searching
+// Technically, searching is O(n/2), but it's still O(n)
+// O(n) Access
