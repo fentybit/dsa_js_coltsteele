@@ -24,6 +24,15 @@ This is my personal note to Udemy course [JavaScript Algorithms and Data Structu
 - Selection Sort
 - Insertion Sort
 
-**[Merge Sort](05_merge_quick_radix_sort.js)**
+**[Merge, Quick and Radix Sort](05_merge_quick_radix_sort.js)**
 
-**[ Sort]()**
+- Merge Sort
+- Quick Sort
+- Radix Sort
+
+**[SLL and DLL](06_dsa_sll_dll.js)**
+
+- Singly Linked List
+- Doubly Linked List
+
+**[Stacks and Queues](07_stacks_queues.js)**
