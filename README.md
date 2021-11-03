@@ -36,3 +36,5 @@ This is my personal note to Udemy course [JavaScript Algorithms and Data Structu
 - Doubly Linked List
 
 **[Stacks and Queues](07_stacks_queues.js)**
+
+**[Binary Search Trees](08_binary_search_trees.js)**
