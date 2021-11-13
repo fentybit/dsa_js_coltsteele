@@ -40,3 +40,5 @@ This is my personal note to Udemy course [JavaScript Algorithms and Data Structu
 **[Binary Search Trees](08_binary_search_trees.js)**
 
 **[Tree Traversal](09_tree_traversal.js)**
+
+**[Binary Heaps](10_binary_heaps.js)**
