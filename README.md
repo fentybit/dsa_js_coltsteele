@@ -44,3 +44,5 @@ This is my personal note to Udemy course [JavaScript Algorithms and Data Structu
 **[Binary Heaps](10_binary_heaps.js)**
 
 **[Hash Tables](11_hash_tables.js)**
+
+**[Graphs](12_graphs.js)**
