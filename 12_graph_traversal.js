@@ -27,9 +27,27 @@ class Graph {
 
     delete this.adjacencyList[vertex];
   }
+
+  depthFirstRecursive(start) {
+    const result = [];
+    const visited = {};
+    const adjacencyList = this.adjacencyList;
+
+    (function dfs(vertex) {
+      if (!vertex) return null;
+      result.push(vertex);
+      visited[vertex] = true;
+
+      adjacencyList[vertex].forEach(neighbor => {
+        if (!visited[neighbor]) {
+          return dfs(neighbor);
+        }
+      });
+    })(start);
+
+    return result;
+  }
 }
-
-
 
 
 

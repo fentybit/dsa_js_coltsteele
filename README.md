@@ -45,4 +45,4 @@ This is my personal note to Udemy course [JavaScript Algorithms and Data Structu
 
 **[Hash Tables](11_hash_tables.js)**
 
-**[Graphs](12_graphs.js)**
+**[Graphs and Graph Traversal](12_graph_traversal.js)**
