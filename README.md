@@ -46,3 +46,5 @@ This is my personal note to Udemy course [JavaScript Algorithms and Data Structu
 **[Hash Tables](11_hash_tables.js)**
 
 **[Graphs and Graph Traversal](12_graph_traversal.js)**
+
+**[Dijsktra's Algorithm](13_dijkstra_algorithm.js)**
