@@ -191,6 +191,34 @@ class SinglyLinkedList {
 
     return this;
   }
+
+  // This function should rotate all the nodes in the list by some number passed in.
+  // For instance, if your list looks like 1 -> 2 -> 3 -> 4 -> 5 and you rotate by 2,
+  // the list should be modified to 3 -> 4 -> 5 -> 1 -> 2. The number passed in to 
+  // rotate can be any integer.
+  // Time complexity O(n) where n is the length of the list.
+  // Space complexity O(1)
+  rotate(index) {
+    let node = this.head;
+    let counter = 0;
+
+    if (index < -this.length || index >= this.length) return this;
+
+    if (index < 0) {
+      index = this.length + index;
+    }
+
+    while (counter < index) {
+      this.tail.next = node;
+      this.tail = node;
+      node = node.next;
+      counter++;
+    }
+
+    this.head = node;
+    this.tail.next = null;
+    return this;
+  }
 }
 
 // O(1) Insertion
