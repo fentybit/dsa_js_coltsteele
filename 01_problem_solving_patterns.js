@@ -451,3 +451,37 @@ function countZeroes(arr) {
 
   return arr.length - left;
 }
+
+// Given a sorted array and a number, write a function called sortedFrequency that counts
+// the occurrences of the number in the array.
+
+sortedFrequency([1, 1, 2, 2, 2, 2, 3], 2) // 4
+sortedFrequency([1, 1, 2, 2, 2, 2, 3], 3) // 1
+sortedFrequency([1, 1, 2, 2, 2, 2, 3], 1) // 2
+sortedFrequency([1, 1, 2, 2, 2, 2, 3], 4) // -1
+
+// Time Complexity O(log n)
+function sortedFrequency(arr, num) {
+  let left = 0;
+  let right = arr.length - 1;
+
+  while (left <= right) {
+    let middle = Math.floor((left + right) / 2);
+    let middleElement = arr[middle];
+
+    if (middleElement < num) {
+      left = middle + 1;
+    } else if (middleElement > num) {
+      right = middle - 1;
+    } else if (middleElement === num && arr[left] < num) {
+      left++;
+    } else if (middleElement === num && arr[right] > num) {
+      right--;
+    } else {
+      break;
+    }
+  }
+
+  let count = right - left + 1;
+  return count ? count : -1;
+}
