@@ -485,3 +485,57 @@ function sortedFrequency(arr, num) {
   let count = right - left + 1;
   return count ? count : -1;
 }
+
+// Write a function called findRotatedIndex which accepts a rotated array of sorted numbers
+// and an integer. The function should return the index of the integer in the array.
+// If the value is not found, return -1.
+
+findRotatedIndex([3, 4, 1, 2], 4) // 1
+findRotatedIndex([6, 7, 8, 9, 1, 2, 3, 4], 8) // 2
+findRotatedIndex([6, 7, 8, 9, 1, 2, 3, 4], 3) // 6
+findRotatedIndex([6, 7, 8, 9, 1, 2, 3, 4], 12) // -1
+findRotatedIndex([37, 44, 66, 102, 10, 22], 14) // -1
+
+// Time Complexity O(log n)
+// Space Complexity O(1)
+
+function findRotatedIndex(arr, num) {
+  let left = 0;
+  let right = arr.length - 1;
+
+  // find the pivot point
+  while (left < right) {
+    let mid = Math.floor((left + right) / 2);
+
+    if (arr[mid] > arr[right]) {
+      left = mid + 1;
+    } else {
+      right = mid;
+    }
+  }
+
+  // find the portion that holds the target value
+  let pivot = left;
+  left = 0;
+  right = arr.length - 1;
+  if (arr[pivot] <= num && num <= arr[right]) {
+    left = pivot;
+  } else {
+    right = pivot;
+  }
+
+  // binary search
+  while (left < right) {
+    let mid = Math.floor((left + right) / 2);
+
+    if (arr[mid] > num) {
+      right = mid - 1;
+    } else if (arr[mid] < num) {
+      left = mid + 1;
+    } else {
+      return mid;
+    }
+  }
+
+  return -1;
+}
