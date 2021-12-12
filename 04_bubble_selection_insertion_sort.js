@@ -152,6 +152,76 @@ function selectionSort(arr) {
   return arr;
 }
 
+// Assign the first element to be the smallest value (this is called the minimum). 
+// It does not matter right now if this actually the smallest value in the array. 
+// Compare this item to the next item in the array until you find a smaller number.
+// If a smaller number is found, designate that smaller number to be the new "minimum"
+// and continue until the end of the array.
+// If the "minimum" is not the value (index) you initially began with, swap the two values.
+// You will now see that the beginning of the array is in the correct order (similar to 
+// how after the first iteration of bubble sort, we know the rightmost element is in 
+// its correct place). Repeat this with the next element until the array is sorted. 
+
+selectionSort([4, 20, 12, 10, 7, 9]) // [4, 7, 9, 10, 12, 20]
+selectionSort([0, -10, 7, 4]) // [-10, 0, 4, 7]
+selectionSort([1, 2, 3]) // [1, 2, 3]
+selectionSort([])
+
+let kitties = ['LilBub', 'Garfield', 'Heathcliff', 'Blue', 'Grumpy']
+function strComp(a, b) {
+  if (a < b) {
+    return -1;
+  } else if (a > b) {
+    return 1;
+  }
+  return 0;
+}
+bubbleSort(kitties, strComp) // ['Blue', 'Garfield', 'Grumpy', 'Heathcliff', LilBub']
+
+let moarKittyDate = [{
+  name: 'LilBub',
+  age: 7
+}, {
+  name: 'Garfield',
+  age: 40
+}, {
+  name: 'Heathcliff',
+  age: 45
+}, {
+  name: 'Blue',
+  age: 1
+}, {
+  name: 'Grumpy',
+  age: 6
+}]
+function oldestToYoungest(a, b) {
+  return b.age - a.age;
+}
+
+function selectionSort(arr, comparator) {
+  const swap = (arr, idx1, idx2) => [arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]];
+
+  if (typeof comparator !== 'function') {
+    for (let i = 0; i < arr.length - 1; i++) {
+      let lowest = i;
+      for (let j = i + 1; j < arr.length; j++) {
+        if (arr[j] < arr[lowest]) lowest = j;
+      }
+      if (i !== lowest) swap(arr, lowest, i);
+    }
+  } else {
+    for (let i = 0; i < arr.length - 1; i++) {
+      let lowest = i;
+      for (let j = i + 1; j < arr.length; j++) {
+        if (comparator(arr[lowest], arr[j]) >= 1) lowest = j;
+      }
+      if (i !== lowest) swap(arr, lowest, i);
+    }
+  }
+
+  return arr;
+}
+
 //! Insertion Sort
 
 function insertionSort(arr) {
