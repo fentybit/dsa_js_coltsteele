@@ -4,6 +4,8 @@
 
 This is my personal note to Udemy course [JavaScript Algorithms and Data Structures Masterclass](git@github.com:fentybit/dsa_js_coltsteele.git) by Colt Steele.
 
+[**Big O Cheatsheet**](https://www.bigocheatsheet.com/)
+
 **[Problem Solving Patterns](01_problem_solving_patterns.js)**
 
 - Frequency Counter
