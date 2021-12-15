@@ -93,6 +93,38 @@ function sameFrequency(number1, number2) {
   return true;
 }
 
+// Write a function called constructNote, which accepts two strings, a message and some letters.
+// The function should return true if the message can be built with the letters that you are given,
+// or it should return false.
+// Assume that there are only lowercase letters and no space or special characters in both the message
+// and the letters. 
+// If M is the length of message and N is the length of letters:
+// Time Complexity O(M + N)
+// Space Complexity O(N)
+
+constructNote('aa', 'abc') // false
+constructNote('abc', 'dcba') // true
+constructNote('aabbc', 'bcabcaddff') // true
+
+function constructNote(str1, str2) {
+  let letters = {};
+  let message = {};
+
+  for (let char of str1) {
+    (letters[char]) ? letters[char] += 1 : letters[char] = 1;
+  }
+
+  for (let char of str2) {
+    (message[char]) ? message[char] += 1 : message[char] = 1;
+  }
+
+  for (let char in letters) {
+    if (!message[char] || message[char] < letters[char]) return false;
+  }
+
+  return true;
+}
+
 //! Multiple Pointers
 
 // Implement a function called countUniqueValues, which accepts a sorted array, and counts the 
