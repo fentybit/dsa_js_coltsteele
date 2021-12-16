@@ -62,6 +62,30 @@ function validAnagram(first, second) {
   }
 }
 
+// Given an array of positive integers, some elements appear twice and others appear once. 
+// Find all the elements that appear twice in this array. Note that you can return the elements
+// in any order.
+// Time Complexity O(n)
+
+findAllDuplicates([4, 3, 2, 7, 8, 2, 3, 1]) // [2, 3]
+findAllDuplicates([4, 3, 2, 1, 0]) // []
+findAllDuplicates([4, 3, 2, 1, 0, 1, 2, 3]) // [3, 2, 1]
+
+function findAllDuplicates(arr) {
+  let freqCounter = {};
+  let duplicates = [];
+
+  for (let num of arr) {
+    (freqCounter[num]) ? freqCounter[num] += 1 : freqCounter[num] = 1;
+  }
+
+  for (let num in freqCounter) {
+    if (freqCounter[num] > 1) duplicates.push(Number(num));
+  }
+
+  return duplicates;
+}
+
 // Write a function called sameFrequency. Given two positive integers, find out if the two numbers have the 
 // same frequency of digits. Solution must be with O(n) time complexity.
 
