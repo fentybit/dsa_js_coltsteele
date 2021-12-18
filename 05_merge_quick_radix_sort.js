@@ -41,20 +41,107 @@ function mergeSort(arr) {
 
 // Time Complexity O(n log n)
 // O(log n) decompositions and O(n) comparisons per decomposition
-
 // Space Complexity O(n)
 
-//? https://www.bigocheatsheet.com/
+// Given two sorted arrays, write a function called merge wgucg accepts two sorted arrays 
+// and returns a new array with both of the values from each array sorted.
+// This function should run in O(n + m) time and O(n + m) space and should not modify the 
+// parameters passed to it.
+// As before, the function should default to sorting numbers in ascending order. If you pass
+// in a comparator function as a third argument, this comparator is what will be used. 
+// Note that the input arrays will always be sorted according to the comparator. 
+// Also, do not use the built in .sort method! We are going to use this helper to implement
+// a sort, so the helper itself shouldn't depend on a sort.
+
+let arr1 = [1, 3, 4, 5]
+let arr2 = [2, 4, 6, 8]
+merge(arr1, arr2) // [1, 2, 3, 4, 4, 5, 6, 8]
+arr1 // [1, 3, 4, 5]
+arr2 // [2, 4, 6, 8]
+
+let arr3 = [-2, -1, 0, 4, 5, 6]
+let arr4 = [-3, -2, -1, 2, 3, 5, 7, 8]
+merge(arr3, arr4) // [-3, -2, -2, -1, -1, 0, 2, 3, 4, 5, 5, 6, 7, 8]
+
+let arr5 = [3, 4, 5]
+let arr6 = [1, 2]
+merge(arr5, arr6) // [1, 2, 3, 4, 5]
+
+let names = ['Bob', 'Ethel', 'Christine']
+let otherNames = ['M', 'Colt', 'Allison', 'SuperLongNameOMG']
+
+function stringLengthComparator(str1, str2) {
+  return str1.length - str2.length;
+}
+
+merge(names, otherNames, stringLengthComparator)
+// ['M', 'Bob', 'Colt', 'Ethel', 'Allison', 'Christine', 'SuperLongNameOMG']
+
+function merge(arr1, arr2, comparator) {
+  let i = 0;
+  let j = 0;
+  let result = [];
+
+  if (typeof comparator !== 'function') {
+    while (i < arr1.length && j < arr2.length) {
+      if (arr1[i] < arr2[j]) {
+        result.push(arr1[i]);
+        i++;
+      } else {
+        result.push(arr2[j]);
+        j++;
+      }
+    }
+  } else {
+    while (i < arr1.length && j < arr2.length) {
+      if (comparator(arr1[i], arr2[j]) >= 1) {
+        result.push(arr2[j]);
+        j++;
+      } else {
+        result.push(arr1[i]);
+        i++;
+      }
+    }
+  }
+
+  while (i < arr1.length) {
+    result.push(arr1[i]);
+    i++;
+  }
+
+  while (j < arr2.length) {
+    result.push(arr2[j]);
+    j++;
+  }
+
+  return result;
+}
+
+// Implement the merge sort algorithm. Given an array, this algorithm will sort the
+// values in the array.
+
+function mergeSort(arr, comparator) {
+  if (arr.length <= 1) return arr;
+  let mid = Math.floor(arr.length / 2);
+  let left = mergeSort(arr.slice(0, mid), comparator);
+  let right = mergeSort(arr.slice(mid), comparator);
+
+  if (typeof comparator !== 'function') {
+    return merge(left, right);
+  } else {
+    return merge(left, right, comparator);
+  }
+}
 
 //! Quick Sort
 
 // pivot function with ES2015 syntax
-function pivot(arr, start = 0, end = arr.length) {
+function pivot(arr, start = 0, end = arr.length - 1) {
   const swap = (arr, idx1, idx2) => [arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]];
   let pivot = arr[start]; // assuming the pivot is always the first element
   let swapIndex = start;
 
-  for (let i = start + 1; i < end; i++) {
+  for (let i = start + 1; i <= end; i++) {
     if (pivot > arr[i]) {
       swapIndex++;
       swap(arr, i, swapIndex);
