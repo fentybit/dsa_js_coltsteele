@@ -43,7 +43,7 @@ function mergeSort(arr) {
 // O(log n) decompositions and O(n) comparisons per decomposition
 // Space Complexity O(n)
 
-// Given two sorted arrays, write a function called merge wgucg accepts two sorted arrays 
+// Given two sorted arrays, write a function called merge that accepts two sorted arrays
 // and returns a new array with both of the values from each array sorted.
 // This function should run in O(n + m) time and O(n + m) space and should not modify the 
 // parameters passed to it.
@@ -155,10 +155,10 @@ function pivot(arr, start = 0, end = arr.length - 1) {
 pivot([4, 8, 2, 1, 5, 7, 6, 3]) // 3
 
 // recursive function
-function quickSort(arr, left = 0, right = arr.length) {
+function quickSort(arr, left = 0, right = arr.length - 1) {
   while (left < right) {
     let pivotIndex = pivot(arr, left, right);
-    quickSort(arr, left, pivotIndex);
+    quickSort(arr, left, pivotIndex - 1);
     quickSort(arr, pivotIndex + 1, right);
   }
   return arr;
