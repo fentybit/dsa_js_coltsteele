@@ -166,12 +166,80 @@ function quickSort(arr, left = 0, right = arr.length - 1) {
 
 quickSort([100, -3, 2, 4, 6, 9, 1, 2, 5, 3, 23]) // [-3, 1, 2, 2, 3, 4, 5, 6, 9, 23, 100]
 
+// The pivot function is responsible for taking an array, setting the pivot value, and 
+// mutating the array so that all values less than the pivot wind up to the left of it,
+// and all values greater than the pivot wind up the right of it.
+// The pivot helper should accept not only an array and an optional comparator, but also
+// an optional start and end index. These should default to 0 and the array length minus 1, 
+// respectively. 
+
+let arr1 = [5, 4, 9, 10, 2, 20, 8, 7, 3]
+let arr2 = [8, 4, 2, 5, 0, 10, 11, 12, 13, 16]
+let arr3 = ["LilBub", "Garfield", "Heathcliff", "Blue", "Grumpy"]
+
+function strLength(a, b) {
+  return a.length - b.length;
+}
+
+pivot(arr1) // 3
+pivot(arr2) // 4
+pivot(arr3, strLength) // 1
+
+arr1.slice(0, 3).sort((a, b) => a - b) // [2, 3, 4]
+arr1.slice(3).sort((a, b) => a - b) // [5, 7, 8, 9, 10, 20]
+
+arr2.slice(0, 4).sort((a, b) => a - b) // [0, 2, 4, 5]
+arr2.slice(4).sort((a, b) => a - b) // [8, 10, 11, 12, 13, 16]
+
+arr3.slice(0, 1).sort(strLength) // ["Blue"]
+arr3.slice(1).sort(strLength) // ["LilBub", "Grumpy", "Garfield", "Heathcliff"]
+
+function pivot(arr, comparator, start = 0, end = arr.length - 1) {
+  const swap = (arr, idx1, idx2) => [arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]];
+  let pivot = arr[start];
+  let swapIndex = start;
+
+  if (typeof comparator !== 'function') {
+    for (let i = start + 1; i <= end; i++) {
+      if (pivot > arr[i]) {
+        swapIndex++;
+        swap(arr, i, swapIndex);
+      }
+    }
+  } else {
+    for (let i = start + 1; i <= end; i++) {
+      if (comparator(pivot, arr[i]) >= 1) {
+        swapIndex++;
+        swap(arr, i, swapIndex);
+      }
+    }
+  }
+
+  swap(arr, start, swapIndex);
+  return swapIndex;
+}
+
+// quickSort function is responsible for taking an array, setting the pivot value, and
+// mutating the array so that all values less than the pivot wind up to the left of it,
+// and all values greater than the pivot wind up to the right of it. The default comparator
+// should assume that the two parameters are numbers and that we are sorting the values 
+// from smallest to largest.
+
+function quickSort(arr, comparator, left = 0, right = arr.length - 1) {
+  while (left < right) {
+    let pivotIndex = pivot(arr, comparator, left, right);
+    quickSort(arr, comparator, left, pivotIndex - 1);
+    quickSort(arr, comparator, pivotIndex + 1, right);
+  }
+  return arr;
+}
+// RangeError: Maximum call stack size exceeded
+
 // Best and Average Time Complexity O(n log n)
 // O(log n) decompositions and O(n) comparisons per decomposition
 // Worst Time Complexity O(n2)
 // O(n) decompositions and O(n) comparisons per decomposition
 // Solution to reduce time complexity can be solved by choosing a mid point in the array
-
 // Space Complexity O(n)
 
 //! Radix Sort
