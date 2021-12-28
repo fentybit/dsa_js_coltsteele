@@ -91,6 +91,11 @@ class BinarySearchTree {
     this.root = removeNode(this.root, value);
     return foundNode ? value : undefined;
   }
+
+  findSecondLargest() {
+    if (!this.root) return undefined;
+    return this.root.value;
+  }
 }
 
 // Both insertion and searching time complexity is O(log n) on best and average
