@@ -359,12 +359,17 @@ t.addWord('fast');
 t.addWord('fat');
 t.addWord('fate');
 t.addWord('father');
+t.addWord('forget');
+t.addWord('awesome');
+t.addWord('argue');
 
 t.findWord('taco') // undefined
 t.findWord('fat').characters // {e: Trie, h: Trie}
 t.findWord('father').characters // {}
 t.findWord('father').isWord // true
 
+t.getWords() // ["fun", "fast", "fat", "fate", "father", "forget", "awesome", "argue"]
+t.getWords().length // 8
 class Trie {
   constructor() {
     this.characters = {};
@@ -397,10 +402,25 @@ class Trie {
       return this.characters[char];
     }
   }
+
+  // Write a function called getWords which returns an array of all of the
+  // words in the Trie. 
+  getWords(words = [], currentWord = "") {
+    if (this.isWord) {
+      words.push(currentWord);
+    }
+
+    for (let char in this.characters) {
+      let nextWord = currentWord + char;
+      this.characters[char].getWords(words, nextWord);
+    }
+
+    return words;
+  }
 }
 
-// Write a function called getWords which returns an array of all of the
-// words in the Trie. 
+// Write a function on the trie class which accepts a string and returns an array 
+// of all the possible options in the true for that string.
 
 let t = new Trie();
 t.addWord('fun');
@@ -412,8 +432,16 @@ t.addWord('forget');
 t.addWord('awesome');
 t.addWord('argue');
 
-t.getWords() // ["fun", "fast", "fat", "fate", "father", "forget", "awesome", "argue"]
-t.getWords().length // 8
+t.autoComplete('fa') // ["fast", "fat", "fate", "father"]
+t.autoComplete('a') // ["awesome", "argue"]
+t.autoComplete('arz') // []
+
+t.removeWord('fat');
+t.characters.f.characters.a.characters.t.isWord // false
+t.characters.f.characters.a.characters.t.characters.e.isWord // true
+
+t.removeWord('argue');
+t.characters.a.characters.r // undefined
 
 class Trie {
   constructor() {
@@ -435,6 +463,16 @@ class Trie {
     return this;
   }
 
+  findWord(word, index = 0) {
+    let char = word[index];
+
+    if (index < word.length - 1 && this.characters[char]) {
+      return this.characters[char].findWord(word, index + 1);
+    } else {
+      return this.characters[char];
+    }
+  }
+
   getWords(words = [], currentWord = "") {
     if (this.isWord) {
       words.push(currentWord);
@@ -446,5 +484,29 @@ class Trie {
     }
 
     return words;
+  }
+
+  autoComplete(prefix) {
+    let subTrie = this.findWord(prefix);
+
+    if (subTrie) return subTrie.getWords([], prefix);
+
+    return [];
+  }
+
+  // Write a function called removeWord which accepts a string and removes 
+  // the word from the Trie. 
+  removeWord(word) {
+    if (word.length === 0) {
+      this.isWord = false;
+      return this;
+    }
+
+    let subTrie = this.characters[word[0]];
+    subTrie.removeWord(word.slice(1));
+
+    if (Object.keys(subTrie.characters).length === 0 && !subTrie.isWord) {
+      delete this.characters[word[0]];
+    }
   }
 }
