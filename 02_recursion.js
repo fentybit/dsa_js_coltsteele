@@ -370,6 +370,17 @@ t.findWord('father').isWord // true
 
 t.getWords() // ["fun", "fast", "fat", "fate", "father", "forget", "awesome", "argue"]
 t.getWords().length // 8
+
+t.autoComplete('fa') // ["fast", "fat", "fate", "father"]
+t.autoComplete('a') // ["awesome", "argue"]
+t.autoComplete('arz') // []
+
+t.removeWord('fat');
+t.characters.f.characters.a.characters.t.isWord // false
+t.characters.f.characters.a.characters.t.characters.e.isWord // true
+
+t.removeWord('argue');
+t.characters.a.characters.r // undefined
 class Trie {
   constructor() {
     this.characters = {};
@@ -417,75 +428,9 @@ class Trie {
 
     return words;
   }
-}
 
-// Write a function on the trie class which accepts a string and returns an array 
-// of all the possible options in the true for that string.
-
-let t = new Trie();
-t.addWord('fun');
-t.addWord('fast');
-t.addWord('fat');
-t.addWord('fate');
-t.addWord('father');
-t.addWord('forget');
-t.addWord('awesome');
-t.addWord('argue');
-
-t.autoComplete('fa') // ["fast", "fat", "fate", "father"]
-t.autoComplete('a') // ["awesome", "argue"]
-t.autoComplete('arz') // []
-
-t.removeWord('fat');
-t.characters.f.characters.a.characters.t.isWord // false
-t.characters.f.characters.a.characters.t.characters.e.isWord // true
-
-t.removeWord('argue');
-t.characters.a.characters.r // undefined
-
-class Trie {
-  constructor() {
-    this.characters = {};
-    this.isWord = false;
-  }
-
-  addWord(word, index = 0) {
-    let char = word[index];
-    let subTrie = this.characters[char] || new Trie();
-
-    if (index === word.length) {
-      this.isWord = true;
-    } else if (index < word.length) {
-      subTrie.addWord(word, index + 1);
-      this.characters[char] = subTrie;
-    }
-
-    return this;
-  }
-
-  findWord(word, index = 0) {
-    let char = word[index];
-
-    if (index < word.length - 1 && this.characters[char]) {
-      return this.characters[char].findWord(word, index + 1);
-    } else {
-      return this.characters[char];
-    }
-  }
-
-  getWords(words = [], currentWord = "") {
-    if (this.isWord) {
-      words.push(currentWord);
-    }
-
-    for (let char in this.characters) {
-      let nextWord = currentWord + char;
-      this.characters[char].getWords(words, nextWord);
-    }
-
-    return words;
-  }
-
+  // Write a function on the trie class which accepts a string and returns an array 
+  // of all the possible options in the true for that string.
   autoComplete(prefix) {
     let subTrie = this.findWord(prefix);
 
