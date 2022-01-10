@@ -41,7 +41,17 @@ coinChange(denominations, 25) // 13
 coinChange(denominations, 45) // 39
 
 function coinChange(denominations, value) {
-  let counter = 0;
+  let combinations = new Array(value + 1);
+  combinations[0] = 1;
 
-  while ()
+  for (let coin of denominations) {
+    for (let i = 1; i < combinations.length; i++) {
+      if (!combinations[i]) combinations[i] = 0;
+      if (i >= coin) {
+        combinations[i] += combinations[i - coin];
+      }
+    }
+  }
+
+  return combinations[value];
 }
