@@ -55,3 +55,16 @@ function coinChange(denominations, value) {
 
   return combinations[value];
 }
+
+function minCoinChange(amounts, value) {
+  let result = [];
+
+  for (let i = amounts.length - 1; i >= 0; i--) {
+    while (value >= amounts[i]) {
+      value -= amounts[i];
+      result.push(amounts[i]);
+    }
+  }
+
+  return result;
+}
